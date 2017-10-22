@@ -1,0 +1,23 @@
+{
+  "name": "survival-tutorial",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "alt": "^0.18.6",
+    "alt-container": "^1.1.1",
+    "alt-utils": "^2.0.0",
+    "babel-plugin-array-includes": "^2.0.3",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "react": "^16.0.0",
+    "react-addons-perf": "^15.4.2",
+    "react-dom": "^16.0.0",
+    "react-scripts": "1.0.14",
+    "uuid": "^3.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
