@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default ({task, onDelete}) => (
-  <div>
-    <span>{task}</span>
-    <button onClick={onDelete}>x</button>
+// Add prop known as children to push the control over Note rendering to Notes
+export default ({children, ...props}) => (
+  <div {...props}>
+    {children}
   </div>
 )

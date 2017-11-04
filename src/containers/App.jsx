@@ -4,7 +4,11 @@ import Notes from '../components/Notes';
 import uuid from 'uuid';
 
 class App extends Component {
+  // The constructor is called before it is mounted
+  // It is the place to initiliaze state
   constructor(props) {
+    // Call super(props) before any other statement, otherwise this.props
+    // will be undefined in the constructor
     super(props);
 
     this.state = {
