@@ -5,31 +5,11 @@ import uuid from 'uuid';
 import connect from '../libs/connect';
 
 class App extends Component {
-  // The constructor is called before it is mounted
-  // It is the place to initiliaze state
-  constructor(props) {
-    // Call super(props) before any other statement, otherwise this.props
-    // will be undefined in the constructor
-    super(props);
-
-    this.state = {
-      notes: [
-        {
-          id: uuid.v4(),
-          task: "Learn React"
-        },
-        {
-          id: uuid.v4(),
-          task: "Do Laundry"
-        }
-      ]
-    };
-  }
 
   // Add a note
   addNote = () => {
     this.setState({
-      notes: this.state.notes.concat([{
+      notes: this.props.notes.concat([{
         id: uuid.v4(),
         task: "New Task"
       }])
@@ -50,7 +30,7 @@ class App extends Component {
   // Activate Editing Input
   activateNoteEdit = (id) => {
     this.setState({
-      notes: this.state.notes.map(note => {
+      notes: this.props.notes.map(note => {
         if(note.id === id) {
           note.editing = true;
         }
@@ -61,7 +41,7 @@ class App extends Component {
 
   editNote = (id, task) => {
     this.setState({
-      notes: this.state.notes.map(note => {
+      notes: this.props.notes.map(note => {
         if(note.id === id) {
           note.editing = false;
           note.task = task;
@@ -72,7 +52,7 @@ class App extends Component {
   }
 
   render() {
-    const {notes} = this.state;
+    const {notes} = this.props;
 
     return (
       <div>
@@ -89,6 +69,6 @@ class App extends Component {
   }
 }
 
-export default connect(() => ({
-  test: 'test'
+export default connect(({notes}) => ({
+  notes
 }))(App);
