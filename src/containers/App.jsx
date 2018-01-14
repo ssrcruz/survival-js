@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Notes from '../components/Notes';
 import uuid from 'uuid';
+import connect from '../libs/connect';
 
 class App extends Component {
   // The constructor is called before it is mounted
@@ -35,7 +36,7 @@ class App extends Component {
     });
   }
 
- // Delete a note
+  // Delete a note
   deleteNote = (id, e) => {
     // Avoid bubbling to edit
     // Avoid triggering possible other events elsewhere in the structure on delete
@@ -46,15 +47,48 @@ class App extends Component {
     });
   }
 
+  // Activate Editing Input
+  activateNoteEdit = (id) => {
+    this.setState({
+      notes: this.state.notes.map(note => {
+        if(note.id === id) {
+          note.editing = true;
+        }
+        return note;
+      })
+    });
+  }
+
+  editNote = (id, task) => {
+    this.setState({
+      notes: this.state.notes.map(note => {
+        if(note.id === id) {
+          note.editing = false;
+          note.task = task;
+        }
+        return note;
+      })
+    });
+  }
+
   render() {
     const {notes} = this.state;
+
     return (
-      <div className="App">
-        <button onClick={this.addNote}>+</button>
-        <Notes notes={notes} onDelete={this.deleteNote} />
+      <div>
+        {this.props.test}
+        <button className="add-note" onClick={this.addNote}>+</button>
+        <Notes
+          notes={notes}
+          onNoteClick={this.activateNoteEdit}
+          onEdit={this.editNote}
+          onDelete={this.deleteNote}
+        />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default connect(() => ({
+  test: 'test'
+}))(App);
